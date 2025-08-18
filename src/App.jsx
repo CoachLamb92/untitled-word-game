@@ -87,14 +87,15 @@ function App() {
 
     return (
     <>
-      <h4>Here is the current word: {data}</h4>
-      
-      <h4>Add letters </h4>
-      Possible words (including used words): {maybe_words.join(" | ")}<br></br>
-      Used words: {allData.join(" | ")}<br></br>
-      Possible words (not including used words): {wordList.join(" | ")}<br></br>
+      <h2>Add a letter</h2>
+
+      <p>Current word:<br></br><b>{data}</b></p>
+      <p>Words used so far:<br></br><b>{allData.join(" | ")}</b></p>
+
+      {/* Possible words (including used words): {maybe_words.join(" | ")}<br></br> */}
+      {/* Possible words (not including used words): {wordList.join(" | ")}<br></br>
       Letter choices: {letters.join(", ")}<br></br>
-      Letter map: {map_string}<br></br>
+      Letter map: {map_string}<br></br> */}
       {items}
     </>
    );
@@ -103,9 +104,11 @@ function App() {
   function AnagramPage() {
     return (
       <>
-        <h4>Anagram</h4>
-        <h4>Here is the current word: {data}</h4>
-        <p>Used words: {allData.join(" | ")}</p>
+        <h2>Anagram</h2>
+
+        <p>Current word:<br></br><b>{data}</b></p>
+        <p>Words used so far:<br></br><b>{allData.join(" | ")}</b></p>
+
         <form onSubmit={handleSubmit}>
           <label> Enter an anagram for "{data}":<br></br>
             <input name="anagram" defaultValue="" />
@@ -141,14 +144,16 @@ function App() {
 
     return (
     <>
-      <h4>Here is the current word: {data}</h4>
-      
-      <h4>Add letters </h4>
-      Possible words (including used words): {maybe_words.join(" | ")}<br></br>
-      Used words: {allData.join(" | ")}<br></br>
-      Possible words (not including used words): {wordList.join(" | ")}<br></br>
+      <h2>Exchange a letter</h2>
+
+      <p>Current word:<br></br><b>{data}</b></p>
+      <p>Words used so far:<br></br><b>{allData.join(" | ")}</b></p>
+  
+      {/* Possible words (including used words): {maybe_words.join(" | ")}<br></br> */}
+      {/* Possible words (not including used words): {wordList.join(" | ")}<br></br>
       Letter choices: {letters.join(", ")}<br></br>
-      Letter map: {map_string}<br></br>
+      Letter map: {map_string}<br></br> */}
+
       {items}
     </>
    );
@@ -206,14 +211,15 @@ function App() {
 
     return (
     <>
-      <h4>Here is the current word: {data}</h4>
+      <h2>Remove a letter</h2>
+
+      <p>Current word:<br></br><b>{data}</b></p>
+      <p>Words used so far:<br></br><b>{allData.join(" | ")}</b></p>
       
-      <h4>Remove letters </h4>
-      Possible words (including used words): {maybe_words.join(" | ")}<br></br>
-      Used words: {allData.join(" | ")}<br></br>
-      Possible words (not including used words): {wordList.join(" | ")}<br></br>
+      {/* Possible words (including used words): {maybe_words.join(" | ")}<br></br> */}
+      {/* Possible words (not including used words): {wordList.join(" | ")}<br></br>
       Letter choices: {letters.join(", ")}<br></br>
-      Letter map: {map_string}<br></br>
+      Letter map: {map_string}<br></br> */}
 
       {items}
     </>
@@ -223,13 +229,24 @@ function App() {
   function MainMenuPage() {
     return (
       <>
-        <h4>Welcome to word_game! A passion project where I tried to
-          learn React!<br></br>
-          I hope it plays well and looks good!</h4>
-
+        <h2>Welcome to word_game: a passion project where I tried to learn React!<br></br>
+          I hope it plays well and looks good!</h2>
+        <h3> Rules:</h3>
         <h4>You randomly start with a 4-letter word. Your goal is
           to choose an option to grow your word, without reusing any words!
         </h4>
+        <h4>With the exception of Anagram, when you choosea powerup, you select which letter to add, exchange, or remove.<br></br>
+        You DO NOT choose, which of the letters (if you have multiple) to remove or exchange, or WHERE the new letter is added.</h4>
+        <h4>The game will (should) return a valid answer if there is one available. It is up to you to choose the correct powerup, and the correct letter.<br></br>
+          Anagram is unforgiving. You submit by hitting return or clicking the button, but any spelling errors,<br></br>
+          mistypes, or accidental clicks will result in Game Over, if text entry box is incorrect
+        </h4>
+        <h3> Disclaimer:</h3>
+        <p>The set of allowed words is vast, including hundreds of simple words from other languages,
+        as well hundreds of super-specific scientific, medical, and outdated words. There are also quite a few swear words,
+        and I can imagine worse dangers in there. So apologies if anything heinous rears its head, this dictionary remains unvetted.</p>
+        <p>Eventually, I'd like to reduce the dictionary to a more specific set of allowed words,
+          perhaps whatever is allowed in Scrabble.</p>
         <button onClick={() => setPage(1)}>Play Game</button>
       </>
     )

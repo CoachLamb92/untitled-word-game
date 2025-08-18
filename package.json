@@ -1,7 +1,6 @@
 {
-  "homepage": "https://github.com/CoachLamb92/word_game.git",
+  "homepage": "https://CoachLamb92.github.io/word_game/",
   "name": "word_game",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
