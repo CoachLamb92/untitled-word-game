@@ -160,13 +160,20 @@ function App() {
   }
 
   function GameOverPage() {
+    function ScoreMessage () {
+      let plural = "";
+      if (allData.length > 1) {
+        plural = "s";
+      }
+      return (<p><b>You scored {allData.length} point{plural}!</b></p>)
+    }
     return (
       <>
-        <h4>GAME OVER</h4>
-        <p>You lost on this word: {data}</p>
-        <p>These are the words you used: {allData.join(" | ")}</p>
-        <p>You scored {allData.length} points!</p>
-          <button onClick={() => resetGame()}>Back to main menu</button>
+        <h2>GAME OVER</h2>
+        <p>You lost on this word:<br></br><b>{data}</b></p>
+        <p>These are all the words you used:<br></br><b>{allData.join(" | ")}</b></p>
+        {ScoreMessage()}
+        <button onClick={() => resetGame()}>Back to main menu</button>
       </>
     )
   }
@@ -174,10 +181,10 @@ function App() {
   function PowerupPage() {
     return (
       <>
-        <h4>Here is the current word: {data}</h4>
-        <p>These are the words have used so far: {allData.join(" | ")}</p>
+        <h2>Choose from one of the powerups</h2>
+        <p>Current word:<br></br><b>{data}</b></p>
+        <p>Words used so far:<br></br><b>{allData.join(" | ")}</b></p>
 
-        <h4>Choose from one of the powerups</h4>
         <button onClick={() => setPage(2)}>Add Letter</button>
         <button onClick={() => setPage(3)}>Anagram</button>
         <button onClick={() => setPage(4)}>Exchange Letter</button>
