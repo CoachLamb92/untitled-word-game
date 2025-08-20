@@ -18,6 +18,24 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.rules {
+  text-align: left;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  
+}
+
+.grid-box {
+  border-style: solid;
+  border-color: white;
+  border-radius: 10px;
+}
+
+
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

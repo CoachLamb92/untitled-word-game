@@ -50,7 +50,7 @@ function App() {
     const formData = new FormData(e.target);
     const formJson = Object.fromEntries(formData.entries());
 
-    let anagram = formJson["anagram"];
+    let anagram = formJson["anagram"].toLowerCase().trim();
 
     if (new Set(wordList).has(anagram)) {
       setData(anagram);
@@ -236,18 +236,54 @@ function App() {
   function MainMenuPage() {
     return (
       <>
-        <h2>Welcome to word_game: a passion project where I tried to learn React!<br></br>
+        <h2 className=''>Welcome to word_game: a passion project where I tried to learn React!<br></br>
           I hope it plays well and looks good!</h2>
-        <h3> Rules:</h3>
         <h4>You randomly start with a 4-letter word. Your goal is
           to choose an option to grow your word, without reusing any words!
         </h4>
-        <h4>With the exception of Anagram, when you choosea powerup, you select which letter to add, exchange, or remove.<br></br>
-        You DO NOT choose, which of the letters (if you have multiple) to remove or exchange, or WHERE the new letter is added.</h4>
-        <h4>The game will (should) return a valid answer if there is one available. It is up to you to choose the correct powerup, and the correct letter.<br></br>
-          Anagram is unforgiving. You submit by hitting return or clicking the button, but any spelling errors,<br></br>
-          mistypes, or accidental clicks will result in Game Over, if text entry box is incorrect
-        </h4>
+
+        <h3 className='rules'> Rules:</h3>
+
+        <div className='grid-container'>
+          <div className='grid-box'>
+            <h4>Add Letters</h4>
+            <h4>You will be offered 5 letters to choose from to add to your current word<br></br>
+            The letter order of the current word does not change<br></br>
+            You should always be offered viable options, where possible<br></br>
+            The game only offers incorrect letters if there are less than 5 viable options</h4>
+            <p>Example: If the only letter that can be added to "handicap" is "s", then "s" will be one of the five options provided on the buttons.<br></br>
+            Example: If there are no viable letters for the current word, 5 random letters will be provided<br></br>
+            Example: If the letter you choose provides multiple options, such as "nail" and "s" ("snail" and "nails"), the game will randomly choose between them</p>
+          </div>
+
+          <div className='grid-box'>
+            <h4>Anagram</h4>
+            <h4>You must enter an anagram into the text field provided<br></br>
+            Pressing the return button on your keyboard, or clicking the "Submut Anagram" button will submit exactly what is written, including whitespace, grammar, and other non-alphabtical characters</h4>
+            <p>Example: The current word is "pan". You type in "na" and prematurely submit. This is an immediate game over<br></br>
+            The button takes no prisoners, so double-check before you submit</p>
+          </div>
+
+          <div className='grid-box'>
+            <h4>Exchange Letters</h4>
+            <h4>You will be offered (at most) 5 letters to choose from. These letters are in your current word, and will be exchanged, if viable, with a random letter to form a new word<br></br>
+            You should always be offered viable options, where possible<br></br>
+            The game only offers letters from your current word. If there are less than 5 viable options in your word, you will be offered letters from your word at random that will lead to a game over<br></br>
+            If your current word has 5 or less unique letters, all letters will be displayed as options, regardless of viability</h4>
+            <p>Example: If the only letter that can be exchanged in "sharing" is "h", then "h" will be one of the 5 letters to choose from. The other 4 will be a random selection of "s", "a", "r", "i", "n" and "g". Selecting "h" will return "scaring" or "staring" or any other viable options.<br></br>
+            Example: If the letter you choose provides multiple options, such as "hell" and "l" ("heel" and "held"), the game will randomly choose between them</p>
+          </div>
+          
+          <div className='grid-box'>
+            <h4>Remove Letters</h4>
+            <h4>You will be offered (at most) 5 letters to choose from. These letters are in your current word, and will be exchanged, if viable, with a random letter to form a new word<br></br>
+            You should always be offered viable options, where possible<br></br>
+            The game only offers letters from your current word. If there are less than 5 viable options in your word, you will be offered letters from your word at random that will lead to a game over<br></br>
+            If your current word has 5 or less unique letters, all letters will be displayed as options, regardless of viability</h4>
+            <p>Example: If the only letter that can be removed from "shallower" is "h", then "h" will be one of the 5 letters to choose from. The other 4 will be a random selection of "s", "a", "l", "o", "w", "e" and "r". Selecting "h" will return "sallower".</p>
+          </div>
+        </div>
+
         <h3> Disclaimer:</h3>
         <p>The set of allowed words is vast, including hundreds of simple words from other languages,
         as well hundreds of super-specific scientific, medical, and outdated words. There are also quite a few swear words,
