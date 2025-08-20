@@ -1,11 +1,30 @@
-# React + Vite
+# Untitled Word Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to Untitled Word Game! This is my word game that barely works using React and lots of JavaScript files and functions.
 
-Currently, two official plugins are available:
+### If anything gets updated, push to main, then execute:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`npm run deploy`
+
+## To-Do
+
+### Graphics
+
+Everywhere, everything, all of it. Images, effects (affects?), the whole 9-yards (maybe 4 yards)
+
+### Main Menu
+
+Get one. Have buttons leading to Rules, Options, etc
+
+### Rules
+
+See above^
+
+### Options
+
+Find some, then ditto^
+
+##### s
 
 ## Expanding the ESLint configuration
 
