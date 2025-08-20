@@ -12,6 +12,7 @@ function App() {
   const starting_word = starting_words_easy[Math.floor(Math.random() * starting_words_easy.length)]
   const [data, setData] = useState(starting_word);
   const [allData, setAllData] = useState([starting_word]);
+  const [history, setHistory] = useState(new Map());
   const [currentPage, setPage] = useState(0);
 
   const contents = {
@@ -21,14 +22,22 @@ function App() {
     "AnagramPage": 3,
     "ExchangeLetterPage": 4,
     "RemoveLetterPage": 5,
-    "GameOverPage": 6
+    "GameOverPage": 6,
+    "RulesPage": 7
   };
 
   function resetGame() {
     const new_word = starting_words_easy[Math.floor(Math.random() * starting_words_easy.length)]
     setData(new_word);
     setAllData([new_word]);
+    setHistory(new Map());
     setPage(0);
+  };
+
+  function updateHistory(word, powerup, letter_or_anagram) {
+    let new_entry = [word, powerup, letter_or_anagram];
+    let updated_map = history.set(history.size+1, new_entry);
+    setHistory(updated_map);
   };
 
   function handleLetter(letter, letter_map) {
@@ -49,15 +58,15 @@ function App() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formJson = Object.fromEntries(formData.entries());
-
+    
     let anagram = formJson["anagram"].toLowerCase().trim();
+    updateHistory(data, "anagram", anagram);
 
     if (new Set(wordList).has(anagram)) {
       setData(anagram);
       setAllData([...allData, anagram]);
       setPage(1);
     } else {
-      console.log("Game Over");
       setPage(6);
     }
   }
@@ -79,7 +88,7 @@ function App() {
       className='playButton'
       key={letters.indexOf(tl)}
       value={tl}
-      onClick={() => handleLetter(tl, letter_map)}
+      onClick={() => { handleLetter(tl, letter_map); updateHistory(data, "add letter", tl)}}
       >
         {tl}
       </button>)
@@ -136,7 +145,7 @@ function App() {
       className='playButton'
       key={letters.indexOf(tl)}
       value={tl}
-      onClick={() => handleLetter(tl, letter_map)}
+      onClick={() => { handleLetter(tl, letter_map); updateHistory(data, "exchange letter", tl); }}
       >
         {tl}
       </button>)
@@ -160,19 +169,39 @@ function App() {
   }
 
   function GameOverPage() {
-    function ScoreMessage () {
+
+    function ScoreMessage() {
       let plural = "";
       if (allData.length > 1) {
         plural = "s";
       }
       return (<p><b>You scored {allData.length} point{plural}!</b></p>)
-    }
+    };
+
+    function ReadableHistory() {
+      let items = []
+
+      history.forEach (function(value, key) {
+        let l_a = ", Letter: "
+        if (value[1] == "anagram") {
+          l_a = ", Anagram: "
+        }
+        let round = "Round " + key + ": Word: " + value[0] + ", Powerup: " + value[1] + l_a + value[2] + " |";
+        items.push(<div key={key}>{round}</div>);
+      })
+    
+      return items;
+    };
+  
     return (
       <>
         <h2>GAME OVER</h2>
         <p>You lost on this word:<br></br><b>{data}</b></p>
         <p>These are all the words you used:<br></br><b>{allData.join(" | ")}</b></p>
         {ScoreMessage()}
+        {/* <p>History:<br></br></p>
+        <b>{ReadableHistory()}</b> */}
+        <br></br>
         <button onClick={() => resetGame()}>Back to main menu</button>
       </>
     )
@@ -210,7 +239,7 @@ function App() {
       className='playButton'
       key={letters.indexOf(tl)}
       value={tl}
-      onClick={() => handleLetter(tl, letter_map)}
+      onClick={() => {handleLetter(tl, letter_map); updateHistory(data, "remove letter", tl); }}
       >
         {tl}
       </button>)
@@ -236,20 +265,29 @@ function App() {
   function MainMenuPage() {
     return (
       <>
-        <h2 className=''>Welcome to word_game: a passion project where I tried to learn React!<br></br>
-          I hope it plays well and looks good!</h2>
-        <h4>You randomly start with a 4-letter word. Your goal is
-          to choose an option to grow your word, without reusing any words!
+        <h2 className=''>Welcome to Untitled Word Game!</h2>
+          <h3>I hope it plays well and looks good!</h3>
+        <h4>You randomly start with a 4-letter word.<br></br>
+        Your goal is to choose an option to conitune your word chain, without reusing any words!
         </h4>
-        <div className='grid-container'>
-          <div>
-            <h3 className='rules'> Rules:</h3>
-          </div>
-          <div>
-            <button onClick={() => setPage(1)}>TLDR: Play Game Now!</button>
-          </div>
-        </div>
+          <button onClick={() => setPage(1)}>Play Game!</button>
+          <br></br>
+          <button onClick={() => setPage(7)}>Rules</button>
 
+        <h3> Disclaimer:</h3>
+        <p>The set of allowed words is vast, including hundreds of simple words from other languages,
+        as well hundreds of super-specific scientific, medical, and outdated words. There are also quite a few swear words,
+        and I can imagine worse dangers in there. So apologies if anything heinous rears its head, this dictionary remains unvetted.</p>
+        <p>Eventually, I'd like to reduce the dictionary to a more specific set of allowed words,
+          perhaps whatever is allowed in Scrabble.</p>
+      </>
+    )
+  }
+
+  function RulesPage() {
+    return (
+      <>
+        <h2>Rules</h2>
         <div className='grid-container'>
           <div className='grid-box'>
             <h4>Add Letters</h4>
@@ -265,7 +303,7 @@ function App() {
           <div className='grid-box'>
             <h4>Anagram</h4>
             <h4>You must enter an anagram into the text field provided<br></br>
-            Pressing the return button on your keyboard, or clicking the "Submit Anagram" button will submit exactly what is written, including whitespace, grammar, and other non-alphabtical characters</h4>
+            Pressing the return button on your keyboard, or clicking the "Submit Anagram" button will submit exactly what is written, including grammar, and other non-alphabtical characters</h4>
             <p>Example: The current word is "pan". You type in "na" and prematurely submit. This is an immediate game over<br></br>
             The button takes no prisoners, so double-check before you submit</p>
           </div>
@@ -289,15 +327,7 @@ function App() {
             <p>Example: If the only letter that can be removed from "shallower" is "h", then "h" will be one of the 5 letters to choose from. The other 4 will be a random selection of "s", "a", "l", "o", "w", "e" and "r". Selecting "h" will return "sallower".</p>
           </div>
         </div>
-
-        <h3> Disclaimer:</h3>
-        <p>The set of allowed words is vast, including hundreds of simple words from other languages,
-        as well hundreds of super-specific scientific, medical, and outdated words. There are also quite a few swear words,
-        and I can imagine worse dangers in there. So apologies if anything heinous rears its head, this dictionary remains unvetted.</p>
-        <p>Eventually, I'd like to reduce the dictionary to a more specific set of allowed words,
-          perhaps whatever is allowed in Scrabble.</p>
-        <button onClick={() => setPage(1)}>Play Game</button>
-
+        <button onClick={() => setPage(0)}>Main Menu</button>
       </>
     )
   }
@@ -317,6 +347,8 @@ function App() {
       return (<><RemoveLetterPage /></>);
     case 6:
       return (<><GameOverPage /></>);
+    case 7:
+      return (<><RulesPage /></>);
     default:
       return (<><h1>ERROR. REFRESH PAGE</h1></>)
   }

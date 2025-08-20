@@ -14,18 +14,20 @@ Everywhere, everything, all of it. Images, effects (affects?), the whole 9-yards
 
 ### Main Menu
 
-Get one. Have buttons leading to Rules, Options, etc
+Design it better
 
 ### Rules
 
-See above^
+Add a visual explanation?
 
 ### Options
 
 Find some, then ditto^
 
-##### s
+### Debugging
 
-## Expanding the ESLint configuration
+Create a function that takes the users' inputs and emails it to me upon game over
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Inputs
+
+Replace words with scrabble dictionary
