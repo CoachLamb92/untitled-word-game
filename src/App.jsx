@@ -241,8 +241,14 @@ function App() {
         <h4>You randomly start with a 4-letter word. Your goal is
           to choose an option to grow your word, without reusing any words!
         </h4>
-
-        <h3 className='rules'> Rules:</h3>
+        <div className='grid-container'>
+          <div>
+            <h3 className='rules'> Rules:</h3>
+          </div>
+          <div>
+            <button onClick={() => setPage(1)}>TLDR: Play Game Now!</button>
+          </div>
+        </div>
 
         <div className='grid-container'>
           <div className='grid-box'>
@@ -259,7 +265,7 @@ function App() {
           <div className='grid-box'>
             <h4>Anagram</h4>
             <h4>You must enter an anagram into the text field provided<br></br>
-            Pressing the return button on your keyboard, or clicking the "Submut Anagram" button will submit exactly what is written, including whitespace, grammar, and other non-alphabtical characters</h4>
+            Pressing the return button on your keyboard, or clicking the "Submit Anagram" button will submit exactly what is written, including whitespace, grammar, and other non-alphabtical characters</h4>
             <p>Example: The current word is "pan". You type in "na" and prematurely submit. This is an immediate game over<br></br>
             The button takes no prisoners, so double-check before you submit</p>
           </div>
@@ -291,6 +297,7 @@ function App() {
         <p>Eventually, I'd like to reduce the dictionary to a more specific set of allowed words,
           perhaps whatever is allowed in Scrabble.</p>
         <button onClick={() => setPage(1)}>Play Game</button>
+
       </>
     )
   }
