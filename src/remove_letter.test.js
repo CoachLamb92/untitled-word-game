@@ -18,6 +18,20 @@ test('beast remove letter', () => {
 test('boast remove letter', () => {
   let word = "boast"
   let result = new Set(RemoveLetter(word));
-  let expected = new Set(["bast", "oast", "boat"]);
+  let expected = new Set(["bast", "oast", "boat", "boas"]);
+  expect(result).toStrictEqual(expected);
+});
+
+test('it remove letter', () => {
+  let word = "ti"
+  let result = new Set(RemoveLetter(word));
+  let expected = new Set(["i", "t"]);
+  expect(result).toStrictEqual(expected);
+});
+
+test('rings remove letter', () => {
+  let word = "rings"
+  let result = new Set(RemoveLetter(word));
+  let expected = new Set(["ring", "rigs", "rins"]);
   expect(result).toStrictEqual(expected);
 });

@@ -15,7 +15,7 @@ function RemoveLetter(word) {
 
     let relevant_choices = [];
     for (let sLWord of shorterWords) {
-        for (let i = 0; i < word_length; i++) {
+        for (let i = 0; i <= word_length; i++) {
             if (sLWord.startsWith(word.slice(0, i)) && sLWord.endsWith(word.slice(i+1))) {
                 relevant_choices.push(sLWord);
                 break;
