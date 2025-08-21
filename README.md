@@ -2,6 +2,8 @@
 
 Welcome to Untitled Word Game! This is my word game that barely works using React and lots of JavaScript files and functions.
 
+#### Version 1.3.1
+
 ### If anything gets updated, push to main, then execute:
 
 `npm run deploy`

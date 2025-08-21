@@ -280,6 +280,7 @@ function App() {
         and I can imagine worse dangers in there. So apologies if anything heinous rears its head, this dictionary remains unvetted.</p>
         <p>Eventually, I'd like to reduce the dictionary to a more specific set of allowed words,
           perhaps whatever is allowed in Scrabble.</p>
+        <p>Version 1.3.1</p>
       </>
     )
   }
